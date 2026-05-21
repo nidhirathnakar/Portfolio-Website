@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { User, MapPin, Code2, Sparkles, Cpu, Link } from "lucide-react";
+import { User, MapPin, Code2, Cpu, Link } from "lucide-react";
 
 export default function About() {
+  const [isTapped, setIsTapped] = useState(false);
+
   const cardVariants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -33,7 +36,13 @@ export default function About() {
           variants={cardVariants}
           className="lg:col-span-5 flex justify-center"
         >
-          <div className="relative w-full max-w-[320px] aspect-[3/4] rounded-sm border border-neutral-800 bg-neutral-950/40 p-3 group overflow-hidden">
+          <div 
+            onMouseDown={() => setIsTapped(true)}
+            onMouseUp={() => setIsTapped(false)}
+            onTouchStart={() => setIsTapped(true)}
+            onTouchEnd={() => setIsTapped(false)}
+            className="relative w-full max-w-[320px] aspect-[3/4] rounded-sm border border-neutral-800 bg-neutral-950/40 p-3 group overflow-hidden cursor-pointer"
+          >
             {/* Ambient inner card glows */}
             <div className="absolute inset-0 bg-gradient-to-tr from-accent-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
@@ -51,7 +60,9 @@ export default function About() {
               <img 
                 src="/nidhi.png" 
                 alt="Nidhi" 
-                className="w-full h-full object-cover filter grayscale contrast-115 brightness-95 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
+                className={`w-full h-full object-cover filter contrast-115 brightness-95 transition-all duration-700 ${
+                  isTapped ? "grayscale-0 scale-105" : "grayscale md:group-hover:grayscale-0 md:group-hover:scale-105"
+                }`}
               />
               
               {/* Tech details hud overlay */}
@@ -95,7 +106,7 @@ export default function About() {
           {/* Section Main Title */}
           <motion.h2 
             variants={cardVariants}
-            className="font-title text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-6 uppercase"
+            className="font-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-6 uppercase"
           >
             THE COGNITIVE PATHWAY
           </motion.h2>

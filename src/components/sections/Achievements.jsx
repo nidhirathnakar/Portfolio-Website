@@ -6,7 +6,7 @@ import { Award, Code2, Users, Rocket } from "lucide-react";
 function CountUpNumber({ endValue, duration = 1.5, suffix = "" }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-10px" });
 
   useEffect(() => {
     if (!inView) return;
@@ -36,7 +36,7 @@ function CountUpNumber({ endValue, duration = 1.5, suffix = "" }) {
     return () => clearInterval(timer);
   }, [inView, endValue, duration]);
 
-  return <span ref={ref}>{count}{suffix}</span>;
+  return <span ref={ref}>{String(count).padStart(endValue.length, '0')}{suffix}</span>;
 }
 
 export default function Achievements() {
@@ -85,7 +85,7 @@ export default function Achievements() {
           <div className="h-[1px] w-12 bg-neutral-800" />
         </div>
         
-        <h2 className="font-title text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-12 uppercase">
+        <h2 className="font-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-12 uppercase">
           SYSTEM ACHIEVEMENTS
         </h2>
 
@@ -96,7 +96,7 @@ export default function Achievements() {
               key={idx}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-10px" }}
               transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="p-6 rounded-sm border border-neutral-900 bg-neutral-950/45 hover:border-accent-orange/15 hover:shadow-[0_0_20px_rgba(255,94,0,0.04)] transition-all flex flex-col justify-between group"
             >

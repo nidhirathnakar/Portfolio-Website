@@ -35,7 +35,7 @@ export default function Experience() {
           <div className="h-[1px] w-12 bg-neutral-800" />
         </div>
         
-        <h2 className="font-title text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-16 uppercase">
+        <h2 className="font-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-16 uppercase">
           EXPERIENCE TIMELINE
         </h2>
 
@@ -49,7 +49,7 @@ export default function Experience() {
               key={idx}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-10px" }}
               transition={{ duration: 0.8, delay: idx * 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="relative"
             >

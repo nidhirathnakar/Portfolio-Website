@@ -145,7 +145,7 @@ export default function Projects() {
           <div className="h-[1px] w-12 bg-neutral-800" />
         </div>
         
-        <h2 className="font-title text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-12 uppercase">
+        <h2 className="font-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-12 uppercase">
           ENGINEERING ARCHIVES
         </h2>
 
@@ -156,7 +156,7 @@ export default function Projects() {
               key={project.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "-10px" }}
               transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="h-full"
             >

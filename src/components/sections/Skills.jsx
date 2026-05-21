@@ -122,7 +122,7 @@ export default function Skills() {
           <div className="h-[1px] w-12 bg-neutral-800" />
         </div>
         
-        <h2 className="font-title text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-12 uppercase">
+        <h2 className="font-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-12 uppercase">
           SKILLS & SYSTEM INVENTORY
         </h2>
 
@@ -131,7 +131,7 @@ export default function Skills() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-10px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {skillCategories.map((cat, idx) => (

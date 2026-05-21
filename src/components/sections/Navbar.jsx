@@ -1,17 +1,16 @@
-import { useState, useEffect, useRef } from "react";
-import { Volume2, VolumeX, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
-  const [isMuted, setIsMuted] = useState(true);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "dark";
+    }
+    return "dark";
+  });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Web Audio Synth references
-  const audioCtxRef = useRef(null);
-  const droneOscRef = useRef(null);
-  const droneFilterRef = useRef(null);
-  const droneGainRef = useRef(null);
 
   const menuItems = [
     { id: "hero", label: "HERO" },
@@ -22,114 +21,15 @@ export default function Navbar() {
     { id: "contact", label: "CONTACT" }
   ];
 
-  // Initialize Web Audio API synth
-  const initAudio = () => {
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      const ctx = new AudioContext();
-      audioCtxRef.current = ctx;
-
-      // Create filter
-      const filter = ctx.createBiquadFilter();
-      filter.type = "lowpass";
-      filter.frequency.value = 180;
-      filter.Q.value = 8;
-      droneFilterRef.current = filter;
-
-      // Create oscillator (Low drone)
-      const osc = ctx.createOscillator();
-      osc.type = "sawtooth";
-      osc.frequency.value = 55; // A1 note
-      osc.connect(filter);
-      droneOscRef.current = osc;
-
-      // Create gain node
-      const gain = ctx.createGain();
-      gain.gain.value = 0.05; // soft volume
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-      droneGainRef.current = gain;
-
-      osc.start();
-    } catch (e) {
-      console.warn("Web Audio API not supported", e);
-    }
-  };
-
-  // Play micro click sound for HUD interaction
-  const playClickSound = () => {
-    if (isMuted || !audioCtxRef.current) return;
-    try {
-      const ctx = audioCtxRef.current;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(1200, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.08);
-      
-      gain.gain.setValueAtTime(0.012, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.08);
-      
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.085);
-    } catch (e) {}
-  };
-
-  const toggleAudio = () => {
-    if (isMuted) {
-      if (!audioCtxRef.current) {
-        initAudio();
-      } else if (audioCtxRef.current.state === "suspended") {
-        audioCtxRef.current.resume();
-      }
-      if (droneGainRef.current) {
-        droneGainRef.current.gain.setTargetAtTime(0.05, audioCtxRef.current.currentTime, 0.2);
-      }
-      setIsMuted(false);
+  // Theme synchronization effect
+  useEffect(() => {
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
     } else {
-      if (droneGainRef.current && audioCtxRef.current) {
-        droneGainRef.current.gain.setTargetAtTime(0, audioCtxRef.current.currentTime, 0.1);
-      }
-      setIsMuted(true);
+      document.documentElement.classList.remove("light");
     }
-  };
-
-  // Adjust drone synth filter cutoff on mouse movement
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!isMuted && droneFilterRef.current && audioCtxRef.current) {
-        const mousePct = e.clientX / window.innerWidth;
-        const targetFreq = 100 + mousePct * 450; // shift cutoff from 100Hz to 550Hz
-        droneFilterRef.current.frequency.setTargetAtTime(
-          targetFreq, 
-          audioCtxRef.current.currentTime, 
-          0.1
-        );
-      }
-    };
-    
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isMuted]);
-
-  // Clean up audio on unmount
-  useEffect(() => {
-    return () => {
-      if (droneOscRef.current) {
-        try {
-          droneOscRef.current.stop();
-        } catch (e) {}
-      }
-      if (audioCtxRef.current) {
-        try {
-          audioCtxRef.current.close();
-        } catch (e) {}
-      }
-    };
-  }, []);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   // Update active section on scroll
   useEffect(() => {
@@ -155,12 +55,14 @@ export default function Navbar() {
 
   const handleLinkClick = (id) => {
     setIsMobileMenuOpen(false);
-    playClickSound();
     const element = document.getElementById(id);
     if (element) {
-      // Lenis handles smooth scrolling, scrollIntoView triggers standard scroll behaviour which Lenis intercepts and smooths
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (
@@ -174,7 +76,7 @@ export default function Navbar() {
           >
             <div className="w-2.5 h-2.5 bg-accent-orange rounded-full group-hover:scale-125 transition-transform" />
             <span className="font-title text-sm tracking-widest text-white font-extrabold uppercase">
-              NIDHI R.
+              NIDHI
             </span>
           </div>
 
@@ -186,7 +88,6 @@ export default function Navbar() {
                 <button
                   key={item.id}
                   onClick={() => handleLinkClick(item.id)}
-                  onMouseEnter={playClickSound}
                   className={`relative px-4 py-1.5 text-[10px] font-mono font-bold tracking-widest transition-colors duration-300 ${
                     active ? "text-white" : "text-neutral-500 hover:text-neutral-300"
                   }`}
@@ -204,41 +105,30 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Audio HUD Panel */}
+          {/* Theme HUD Toggle Panel */}
           <div className="flex items-center gap-4">
             <button
-              onClick={toggleAudio}
-              onMouseEnter={playClickSound}
-              className={`p-2 rounded-full border transition-all duration-300 ${
-                isMuted 
-                  ? "border-neutral-800 text-neutral-500 hover:border-neutral-700" 
-                  : "border-accent-orange/50 text-accent-orange shadow-[0_0_8px_#ff5e00] hover:scale-105"
+              onClick={toggleTheme}
+              className={`p-2 rounded-full border transition-all duration-300 cursor-pointer ${
+                theme === "light" 
+                  ? "border-accent-orange/40 text-accent-orange hover:bg-accent-orange/5 hover:scale-105 shadow-[0_0_8px_rgba(255,94,0,0.15)]" 
+                  : "border-neutral-800 text-neutral-500 hover:border-neutral-700 hover:text-neutral-300 hover:scale-105"
               }`}
-              title={isMuted ? "Unmute Ambient Drone Synthesizer" : "Mute Ambient Drone"}
+              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              {isMuted ? (
-                <VolumeX className="w-3.5 h-3.5" />
+              {theme === "dark" ? (
+                <Moon className="w-3.5 h-3.5" />
               ) : (
-                <div className="flex items-center gap-0.5">
-                  <Volume2 className="w-3.5 h-3.5 mr-1" />
-                  <div className="flex items-end h-2.5">
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                  </div>
-                </div>
+                <Sun className="w-3.5 h-3.5 text-accent-orange" />
               )}
             </button>
 
             {/* Mobile menu toggle */}
             <button
               onClick={() => {
-                playClickSound();
                 setIsMobileMenuOpen(!isMobileMenuOpen);
               }}
-              className="md:hidden p-2 border border-neutral-800 text-neutral-400 hover:text-white rounded-full"
+              className="md:hidden p-2 border border-neutral-800 text-neutral-400 hover:text-white rounded-full cursor-pointer"
             >
               {isMobileMenuOpen ? <X className="w-3.5 h-3.5" /> : <Menu className="w-3.5 h-3.5" />}
             </button>

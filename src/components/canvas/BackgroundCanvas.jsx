@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { useMousePosition } from "../../hooks/useMousePosition";
 
 // Component to handle scroll-driven camera and light motion
-function SceneController({ mousePos }) {
+function SceneController({ mousePos, isLight }) {
   const { camera } = useThree();
   const lightRef = useRef();
   
@@ -86,18 +86,18 @@ function SceneController({ mousePos }) {
 
   return (
     <>
-      <ambientLight intensity={0.15} />
-      <directionalLight position={[10, 10, 10]} intensity={0.4} color="#ffedd5" />
+      <ambientLight intensity={isLight ? 0.65 : 0.15} />
+      <directionalLight position={[10, 10, 10]} intensity={isLight ? 0.8 : 0.4} color="#ffedd5" />
       <pointLight 
         ref={lightRef} 
         position={[0, 0, 3]} 
-        intensity={2.5} 
+        intensity={isLight ? 1.2 : 2.5} 
         distance={8} 
         color="#ff5e00" 
       />
       <pointLight 
         position={[-3, -3, -2]} 
-        intensity={0.8} 
+        intensity={isLight ? 0.4 : 0.8} 
         color="#00ffff" 
       />
     </>
@@ -105,7 +105,7 @@ function SceneController({ mousePos }) {
 }
 
 // 3D Particles drift mesh
-function FloatingParticles({ mousePos }) {
+function FloatingParticles({ mousePos, isLight }) {
   const pointsRef = useRef();
   
   // Dynamically scale down particles on mobile to improve render performance
@@ -139,19 +139,19 @@ function FloatingParticles({ mousePos }) {
     <Points ref={pointsRef} positions={positions.current} stride={3}>
       <pointsMaterial
         size={0.035}
-        color="#ff9d00"
+        color={isLight ? "#cc4b00" : "#ff9d00"}
         transparent
-        opacity={0.45}
+        opacity={isLight ? 0.6 : 0.45}
         sizeAttenuation={true}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={isLight ? THREE.NormalBlending : THREE.AdditiveBlending}
       />
     </Points>
   );
 }
 
 // Interactive center grid sphere representing AI and network nodes
-function CoreGeometry({ mousePos }) {
+function CoreGeometry({ mousePos, isLight }) {
   const meshRef = useRef();
   const gridRef = useRef();
 
@@ -183,12 +183,12 @@ function CoreGeometry({ mousePos }) {
         <mesh ref={meshRef}>
           <sphereGeometry args={[1, sphereSegments, sphereSegments]} />
           <MeshDistortMaterial
-            color="#080808"
-            roughness={0.1}
-            metalness={0.9}
+            color={isLight ? "#e5e5e5" : "#080808"}
+            roughness={isLight ? 0.25 : 0.1}
+            metalness={isLight ? 0.2 : 0.9}
             distort={0.45}
             speed={2.2}
-            clearcoat={1.0}
+            clearcoat={isLight ? 0.1 : 1.0}
             clearcoatRoughness={0.1}
           />
         </mesh>
@@ -201,8 +201,8 @@ function CoreGeometry({ mousePos }) {
           color="#ff5e00"
           wireframe
           transparent
-          opacity={0.08}
-          blending={THREE.AdditiveBlending}
+          opacity={isLight ? 0.18 : 0.08}
+          blending={isLight ? THREE.NormalBlending : THREE.AdditiveBlending}
         />
       </mesh>
     </group>
@@ -211,16 +211,34 @@ function CoreGeometry({ mousePos }) {
 
 export default function BackgroundCanvas() {
   const mousePos = useMousePosition();
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLight(document.documentElement.classList.contains("light"));
+    };
+
+    checkTheme(); // Initial check
+
+    // Set up a MutationObserver to listen to class additions/removals on the html tag
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-screen -z-10 pointer-events-none select-none bg-[#030303]">
+    <div className={`fixed top-0 left-0 w-full h-screen -z-10 pointer-events-none select-none transition-colors duration-500 ${isLight ? "bg-[#f7f7f9]" : "bg-[#030303]"}`}>
       <Canvas
         camera={{ position: [0, 0, 6.5], fov: 60 }}
-        gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
-        <SceneController mousePos={mousePos} />
-        <FloatingParticles mousePos={mousePos} />
-        <CoreGeometry mousePos={mousePos} />
+        <SceneController mousePos={mousePos} isLight={isLight} />
+        <FloatingParticles mousePos={mousePos} isLight={isLight} />
+        <CoreGeometry mousePos={mousePos} isLight={isLight} />
       </Canvas>
       
       {/* Subtle grid and dark gradient overlay HUD layers */}

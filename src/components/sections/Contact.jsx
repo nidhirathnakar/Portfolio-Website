@@ -122,7 +122,7 @@ export default function Contact() {
               <div className="h-[1px] w-12 bg-neutral-800" />
             </div>
             
-            <h2 className="font-title text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-6 uppercase">
+            <h2 className="font-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-wider mb-6 uppercase">
               TRANSMIT A MESSAGE
             </h2>
 
