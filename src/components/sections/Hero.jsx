@@ -87,8 +87,8 @@ export default function Hero() {
         </h1>
 
         {/* Dynamic Title Subheader */}
-        <motion.div variants={itemVariants} className="mb-4 md:mb-6 w-full max-w-3xl px-4 flex justify-center">
-          <h2 className="font-mono text-[2.6vw] sm:text-sm md:text-base tracking-[0.16em] sm:tracking-[0.3em] text-neutral-500 uppercase whitespace-nowrap text-center">
+        <motion.div variants={itemVariants} className="mb-4 md:mb-6 w-full max-w-3xl px-6 flex justify-center">
+          <h2 className="font-mono text-[10px] sm:text-sm md:text-base tracking-[0.12em] sm:tracking-[0.25em] text-neutral-500 uppercase text-center leading-relaxed sm:whitespace-nowrap">
             Computer Science Engineer <span className="text-accent-orange px-1">•</span> AI <span className="text-accent-orange px-1">•</span> Web3 <span className="text-accent-orange px-1">•</span> Full Stack Developer
           </h2>
         </motion.div>
