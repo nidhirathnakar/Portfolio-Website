@@ -116,7 +116,7 @@ export default function About() {
             variants={cardVariants}
             className="text-neutral-300 font-light text-sm md:text-base leading-relaxed mb-6"
           >
-            I am a passionate **Computer Science Engineering student** and developer dedicated to crafting intelligent, scalable, and visually immersive digital solutions. My engineering focus centers around combining the power of **Artificial Intelligence** with decentralized **Web3/Blockchain architectures** and robust full stack client interfaces.
+            I am a passionate <b>Computer Science Engineering student</b> and developer dedicated to crafting intelligent, scalable, and visually immersive digital solutions. My engineering focus centers around combining the power of <b>Artificial Intelligence</b> with decentralized <b>Web3/Blockchain architectures</b> and robust full stack client interfaces.
           </motion.p>
 
           <motion.p 
