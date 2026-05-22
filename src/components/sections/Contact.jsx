@@ -100,7 +100,7 @@ export default function Contact() {
   return (
     <section 
       id="contact" 
-      className="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden"
+      className="relative min-h-screen w-full flex items-center justify-center py-14 md:py-24 px-6 overflow-hidden"
     >
       <div className="absolute inset-0 bg-dots-cyber opacity-[0.02] pointer-events-none" />
       

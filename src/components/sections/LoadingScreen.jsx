@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, animate } from "framer-motion";
 
 export default function LoadingScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
@@ -16,23 +16,21 @@ export default function LoadingScreen({ onComplete }) {
   ];
 
   useEffect(() => {
-    let currentProgress = 0;
-    
-    // Simulate loading progress with varying speeds
-    const interval = setInterval(() => {
-      const increment = Math.floor(Math.random() * 8) + 2;
-      currentProgress = Math.min(currentProgress + increment, 100);
-      setProgress(currentProgress);
+    const controls = animate(0, 100, {
+      duration: 3.0,
+      ease: [0.76, 0, 0.24, 1],
+      onUpdate: (latest) => {
+        const rounded = Math.floor(latest);
+        setProgress(rounded);
 
-      // Rotate HUD logs based on progress
-      const logIdx = Math.min(
-        Math.floor((currentProgress / 100) * logs.length),
-        logs.length - 1
-      );
-      setLogText(logs[logIdx]);
-
-      if (currentProgress === 100) {
-        clearInterval(interval);
+        // Rotate HUD logs based on progress
+        const logIdx = Math.min(
+          Math.floor((rounded / 100) * logs.length),
+          logs.length - 1
+        );
+        setLogText(logs[logIdx]);
+      },
+      onComplete: () => {
         setTimeout(() => {
           setIsDone(true);
           setTimeout(() => {
@@ -40,9 +38,9 @@ export default function LoadingScreen({ onComplete }) {
           }, 600); // Allow fade out animation to finish
         }, 850);
       }
-    }, 80);
+    });
 
-    return () => clearInterval(interval);
+    return () => controls.stop();
   }, []);
 
   return (
@@ -94,10 +92,10 @@ export default function LoadingScreen({ onComplete }) {
             {/* Massive Percentage Counter */}
             <div className="relative">
               <div className="text-7xl md:text-9xl font-bold font-title text-stroke tracking-tighter opacity-15">
-                {String(progress).padStart(3, "0")}%
+                {progress}%
               </div>
               <div className="absolute inset-0 flex items-center justify-center text-5xl md:text-7xl font-bold font-title text-white tracking-tighter glow-text-orange">
-                {String(progress).padStart(3, "0")}%
+                {progress}%
               </div>
             </div>
           </div>

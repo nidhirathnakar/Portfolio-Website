@@ -47,7 +47,7 @@ export default function Hero() {
   return (
     <section 
       id="hero" 
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden px-6 pt-24 md:pt-0"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-12 md:py-0"
     >
       {/* Background HUD graphics */}
       <div className="absolute top-1/4 left-1/10 w-96 h-96 bg-accent-orange/5 rounded-full filter blur-[100px] pointer-events-none" />
@@ -64,7 +64,7 @@ export default function Hero() {
         {/* Subtle Cyber Status Badge */}
         <motion.div 
           variants={itemVariants}
-          className="mb-8 px-4 py-1.5 rounded-full border border-accent-orange/20 bg-accent-orange/[0.03] flex items-center gap-2"
+          className="mb-6 md:mb-8 px-4 py-1.5 rounded-full border border-accent-orange/20 bg-accent-orange/[0.03] flex items-center gap-2"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-accent-orange animate-ping" />
           <span className="font-mono text-[9px] md:text-[10px] tracking-[0.25em] text-accent-orangeLight font-bold uppercase">
@@ -73,7 +73,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Giant Staggered Typography Reveal */}
-        <h1 className="font-title font-extrabold text-5xl md:text-8xl lg:text-9xl text-white tracking-[0.12em] uppercase leading-none overflow-hidden flex flex-wrap justify-center mb-6">
+        <h1 className="font-title font-extrabold text-5xl md:text-8xl lg:text-9xl text-white tracking-[0.12em] uppercase leading-none overflow-hidden flex flex-wrap justify-center mb-4 md:mb-6">
           {nameString.split("").map((letter, idx) => (
             <motion.span
               key={idx}
@@ -87,8 +87,8 @@ export default function Hero() {
         </h1>
 
         {/* Dynamic Title Subheader */}
-        <motion.div variants={itemVariants} className="mb-6 max-w-2xl">
-          <h2 className="font-mono text-xs md:text-sm tracking-[0.3em] text-neutral-500 uppercase">
+        <motion.div variants={itemVariants} className="mb-4 md:mb-6 w-full max-w-3xl px-4 flex justify-center">
+          <h2 className="font-mono text-[2.4vw] sm:text-xs md:text-sm tracking-[0.16em] sm:tracking-[0.3em] text-neutral-500 uppercase whitespace-nowrap text-center">
             Computer Science Engineer <span className="text-accent-orange px-1">•</span> AI <span className="text-accent-orange px-1">•</span> Web3 <span className="text-accent-orange px-1">•</span> Full Stack Developer
           </h2>
         </motion.div>
@@ -96,7 +96,7 @@ export default function Hero() {
         {/* Elegant Tagline */}
         <motion.p
           variants={itemVariants}
-          className="text-neutral-400 text-sm md:text-base lg:text-lg font-light tracking-wide max-w-2xl leading-relaxed mb-12"
+          className="text-neutral-400 text-sm md:text-base lg:text-lg font-light tracking-wide max-w-2xl leading-relaxed mb-6 md:mb-12"
         >
           Building intelligent systems, immersive digital experiences, and futuristic decentralized applications.
         </motion.p>
@@ -154,14 +154,14 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1, repeat: Infinity, repeatType: "reverse" }}
         onClick={() => handleScrollTo("about")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer flex flex-col items-center gap-2 group z-10"
+        className="relative bottom-auto left-auto translate-x-0 mt-12 md:absolute md:bottom-8 md:left-1/2 md:-translate-x-1/2 md:mt-0 cursor-pointer flex flex-col items-center gap-1.5 md:gap-2 group z-10"
       >
         <span className="font-mono text-[9px] tracking-[0.3em] text-neutral-600 group-hover:text-accent-orange transition-colors uppercase">
           SCROLL TO EXPLORE
         </span>
-        <div className="w-6 h-10 border border-neutral-800 rounded-full flex justify-center p-1 group-hover:border-accent-orange/50 transition-colors">
+        <div className="w-5 h-9 md:w-6 md:h-10 border border-neutral-800 rounded-full flex justify-center p-1 group-hover:border-accent-orange/50 transition-colors">
           <motion.div
-            animate={{ y: [0, 12, 0] }}
+            animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             className="w-1 h-1.5 bg-accent-orange rounded-full"
           />

@@ -23,7 +23,7 @@ export default function About() {
   return (
     <section 
       id="about" 
-      className="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden bg-[#030303]/30"
+      className="relative min-h-screen w-full flex items-center justify-center py-14 md:py-24 px-6 overflow-hidden bg-[#030303]/30"
     >
       <div className="absolute inset-0 bg-dots-cyber opacity-[0.02] pointer-events-none" />
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,6 +11,8 @@ export default function Navbar() {
     return "dark";
   });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollYRef = useRef(0);
 
   const menuItems = [
     { id: "hero", label: "HERO" },
@@ -31,11 +33,25 @@ export default function Navbar() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Update active section on scroll
+  // Update active section and handle hide-on-scroll behavior
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.45;
+      const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
       
+      // Determine visibility
+      if (currentScrollY <= 20) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false); // scrolling down
+      } else {
+        setIsVisible(true); // scrolling up
+      }
+      
+      lastScrollYRef.current = currentScrollY;
+
+      // Track active section
+      const scrollPosition = currentScrollY + window.innerHeight * 0.45;
       for (const item of menuItems) {
         const element = document.getElementById(item.id);
         if (element) {
@@ -49,7 +65,7 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -65,9 +81,18 @@ export default function Navbar() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
+  const showNav = isVisible || isMobileMenuOpen;
+
   return (
     <>
-      <nav className="fixed top-6 left-0 right-0 z-40 px-6 flex justify-center">
+      <motion.nav 
+        animate={{ 
+          y: showNav ? 0 : -100, 
+          opacity: showNav ? 1 : 0 
+        }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-6 left-0 right-0 z-40 px-6 flex justify-center"
+      >
         <div className="w-full max-w-5xl flex items-center justify-between glass-panel px-6 py-3.5 rounded-full border-white/5">
           {/* Logo Name */}
           <div 
@@ -134,7 +159,7 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Drawer Menu */}
       <AnimatePresence>

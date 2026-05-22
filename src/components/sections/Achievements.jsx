@@ -49,13 +49,6 @@ export default function Achievements() {
       icon: <Code2 className="w-5 h-5 text-accent-orange" />
     },
     {
-      label: "HACKATHON ATTENDEES",
-      stat: "300",
-      suffix: "+",
-      detail: "Organized and led a national-level hackathon with 300+ students and developers at Sir MVIT.",
-      icon: <Users className="w-5 h-5 text-accent-orange" />
-    },
-    {
       label: "COMMUNITIES LED",
       stat: "02",
       suffix: "",
@@ -74,7 +67,7 @@ export default function Achievements() {
   return (
     <section 
       id="achievements" 
-      className="relative min-h-[80vh] w-full flex items-center justify-center py-24 px-6 overflow-hidden bg-[#030303]/30"
+      className="relative min-h-[80vh] w-full flex items-center justify-center py-14 md:py-24 px-6 overflow-hidden bg-[#030303]/30"
     >
       <div className="absolute inset-0 bg-dots-cyber opacity-[0.02] pointer-events-none" />
 
@@ -90,7 +83,7 @@ export default function Achievements() {
         </h2>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stats.map((item, idx) => (
             <motion.div
               key={idx}

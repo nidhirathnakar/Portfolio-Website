@@ -1,7 +1,358 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, ShieldAlert, Cpu, Database, Server, Box } from "lucide-react";
+import { ShieldAlert, Cpu, Box } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+
+// Component for DecentraEstate dynamic background (Blockchain Mesh Network)
+function DecentraEstateBackground() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        width = canvas.width = entry.contentRect.width;
+        height = canvas.height = entry.contentRect.height;
+      }
+    });
+    resizeObserver.observe(canvas);
+
+    const particles = [];
+    const particleCount = 15;
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: Math.random() * 2 + 1,
+      });
+    }
+
+    let gridOffset = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Subtle futuristic orange glow (radial)
+      const glowGrad = ctx.createRadialGradient(
+        width / 2,
+        height / 2,
+        10,
+        width / 2,
+        height / 2,
+        Math.max(width, height) / 1.2
+      );
+      glowGrad.addColorStop(0, "rgba(255, 94, 0, 0.07)");
+      glowGrad.addColorStop(1, "rgba(255, 94, 0, 0)");
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // Holographic grid motion
+      ctx.strokeStyle = "rgba(255, 94, 0, 0.02)";
+      ctx.lineWidth = 1;
+      gridOffset = (gridOffset + 0.1) % 30;
+      
+      for (let x = gridOffset; x < width; x += 30) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = gridOffset; y < height; y += 30) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Moving nodes
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 94, 0, 0.25)";
+        ctx.fill();
+      });
+
+      // Connections
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            const alpha = (1 - dist / 90) * 0.12;
+            ctx.strokeStyle = `rgba(255, 94, 0, ${alpha})`;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-30 z-0" />;
+}
+
+// Component for AI Malicious website detector (Red Matrix Warning Pulse)
+function MaliciousDetectorBackground() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        width = canvas.width = entry.contentRect.width;
+        height = canvas.height = entry.contentRect.height;
+      }
+    });
+    resizeObserver.observe(canvas);
+
+    const fontSize = 10;
+    const columns = Math.floor(width / fontSize) + 1;
+    const yPositions = Array(columns).fill(0).map(() => Math.random() * -100);
+
+    let scanLineY = 0;
+    let pulseOpacity = 0;
+    let pulseDirection = 1;
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(3, 3, 3, 0.15)";
+      ctx.fillRect(0, 0, width, height);
+
+      // Matrix rain (red theme)
+      ctx.fillStyle = "rgba(239, 68, 68, 0.1)";
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < yPositions.length; i++) {
+        const char = Math.random() > 0.5 ? "1" : "0";
+        const x = i * fontSize;
+        const y = yPositions[i];
+        
+        ctx.fillText(char, x, y);
+
+        if (y > height && Math.random() > 0.98) {
+          yPositions[i] = 0;
+        } else {
+          yPositions[i] += 1.2;
+        }
+      }
+
+      // Cyber Grid
+      ctx.strokeStyle = "rgba(239, 68, 68, 0.01)";
+      ctx.lineWidth = 1;
+      const gridSpacing = 25;
+      for (let x = 0; x < width; x += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Scan-line
+      scanLineY = (scanLineY + 1) % height;
+      const scanGrad = ctx.createLinearGradient(0, scanLineY - 10, 0, scanLineY + 2);
+      scanGrad.addColorStop(0, "rgba(239, 68, 68, 0)");
+      scanGrad.addColorStop(0.5, "rgba(239, 68, 68, 0.05)");
+      scanGrad.addColorStop(1, "rgba(239, 68, 68, 0.15)");
+      
+      ctx.fillStyle = scanGrad;
+      ctx.fillRect(0, scanLineY - 10, width, 12);
+
+      ctx.beginPath();
+      ctx.moveTo(0, scanLineY);
+      ctx.lineTo(width, scanLineY);
+      ctx.strokeStyle = "rgba(239, 68, 68, 0.25)";
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+
+      // Pulses
+      pulseOpacity += 0.01 * pulseDirection;
+      if (pulseOpacity >= 0.2) {
+        pulseOpacity = 0.2;
+        pulseDirection = -1;
+      } else if (pulseOpacity <= 0) {
+        pulseOpacity = 0;
+        pulseDirection = 1;
+      }
+      ctx.fillStyle = `rgba(239, 68, 68, ${pulseOpacity * 0.1})`;
+      ctx.fillRect(0, 0, width, height);
+
+      // Noise glitch
+      if (Math.random() > 0.985) {
+        ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
+        ctx.fillRect(Math.random() * width, Math.random() * height, Math.random() * 40 + 10, Math.random() * 3 + 1);
+      }
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-30 z-0" />;
+}
+
+// Component for ClinIQ Platform background (ECG Wave & Medical Particles)
+function CliniqBackground() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        width = canvas.width = entry.contentRect.width;
+        height = canvas.height = entry.contentRect.height;
+      }
+    });
+    resizeObserver.observe(canvas);
+
+    const particles = [];
+    const particleCount = 10;
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vy: -0.12 - Math.random() * 0.12,
+        vx: (Math.random() - 0.5) * 0.1,
+        size: Math.random() * 3 + 2,
+        type: Math.random() > 0.65 ? "cross" : "circle",
+        opacity: Math.random() * 0.2 + 0.1,
+      });
+    }
+
+    let pulseX = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Soft glow
+      const glowGrad = ctx.createRadialGradient(
+        width / 2,
+        height * 0.75,
+        5,
+        width / 2,
+        height * 0.75,
+        Math.max(width, height) / 1.1
+      );
+      glowGrad.addColorStop(0, "rgba(0, 255, 255, 0.05)");
+      glowGrad.addColorStop(1, "rgba(0, 255, 255, 0)");
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // ECG wave
+      ctx.beginPath();
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = "rgba(0, 255, 255, 0.09)";
+      ctx.shadowBlur = 3;
+      ctx.shadowColor = "#00ffff";
+
+      ctx.moveTo(0, height * 0.65);
+      for (let x = 0; x < width; x++) {
+        let y = height * 0.65;
+        const localX = (x - pulseX + width) % width;
+        if (localX > 120 && localX < 160) {
+          const t = localX - 120;
+          if (t < 8) y -= t * 1.5;
+          else if (t < 20) y += (t - 8) * 2 - 12;
+          else if (t < 28) y -= (t - 20) * 1.8 - 12;
+        }
+        ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      pulseX = (pulseX + 0.8) % width;
+
+      // Float particles
+      particles.forEach((p) => {
+        p.y += p.vy;
+        p.x += p.vx;
+
+        if (p.y < -10) {
+          p.y = height + 10;
+          p.x = Math.random() * width;
+        }
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+
+        ctx.strokeStyle = `rgba(0, 255, 255, ${p.opacity})`;
+        ctx.lineWidth = 0.8;
+
+        if (p.type === "cross") {
+          ctx.beginPath();
+          ctx.moveTo(p.x - p.size / 2, p.y);
+          ctx.lineTo(p.x + p.size / 2, p.y);
+          ctx.moveTo(p.x, p.y - p.size / 2);
+          ctx.lineTo(p.x, p.y + p.size / 2);
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      });
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-35 z-0" />;
+}
 
 // Project Tilt Card Wrapper
 function ProjectTiltCard({ children, className }) {
@@ -66,18 +417,6 @@ export default function Projects() {
       tech: ["Solidity", "Hardhat", "Ethereum", "Web3.js", "MetaMask", "Node.js"],
       icon: <Box className="w-5 h-5 text-accent-orange" />,
       accentColor: "#ff5e00",
-      graphic: (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-          <div className="w-48 h-48 border border-accent-orange/15 rounded-lg animate-spin duration-15000 relative flex items-center justify-center">
-            <div className="w-36 h-36 border border-dashed border-accent-orange/20 rounded-full animate-pulse" />
-            <div className="absolute w-2 h-2 bg-accent-orange rounded-full top-0 left-1/2 -translate-x-1/2" />
-            <div className="absolute w-2 h-2 bg-[#00ffff] rounded-full bottom-0 left-1/2 -translate-x-1/2" />
-            <div className="w-16 h-16 border border-accent-orange/30 rotate-45 flex items-center justify-center">
-              <span className="font-mono text-[9px] text-accent-orange select-none tracking-widest">BLOCK</span>
-            </div>
-          </div>
-        </div>
-      )
     },
     {
       id: "malicious-detector",
@@ -87,25 +426,6 @@ export default function Projects() {
       tech: ["Python", "Flask", "Machine Learning", "JavaScript", "Extension API", "HTML/CSS"],
       icon: <ShieldAlert className="w-5 h-5 text-red-500" />,
       accentColor: "#ef4444",
-      graphic: (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-          <div className="w-full h-full relative overflow-hidden bg-grid-cyber opacity-10"></div>
-          <div className="absolute w-40 h-40 border border-red-500/20 rounded-sm flex flex-col justify-between p-2 font-mono text-[8px] text-red-500/60">
-            <div className="flex justify-between items-center border-b border-red-500/20 pb-1">
-              <span>SCANNER_V1</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
-            </div>
-            <div className="space-y-0.5">
-              <p>URL: HTTPS://UNKNOWN_SRC...</p>
-              <p>STATUS: CLASSIFYING...</p>
-              <p className="text-red-500 font-bold">THREAT_LEVEL: DANGER</p>
-            </div>
-            <div className="w-full h-1 bg-red-500/10 relative overflow-hidden">
-              <div className="absolute top-0 left-0 h-full bg-red-500 animate-scan-line w-full" />
-            </div>
-          </div>
-        </div>
-      )
     },
     {
       id: "cliniq",
@@ -115,26 +435,20 @@ export default function Projects() {
       tech: ["Python", "Machine Learning", "NLP", "Flask", "MongoDB", "JavaScript"],
       icon: <Cpu className="w-5 h-5 text-[#00ffff]" />,
       accentColor: "#00ffff",
-      graphic: (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-          <div className="w-48 h-20 relative flex items-center justify-center">
-            {/* SVG electrocardiogram pulse */}
-            <svg viewBox="0 0 200 80" className="w-full h-full stroke-[#00ffff]/30 fill-none stroke-2">
-              <path d="M 0,40 L 40,40 L 50,20 L 60,60 L 70,40 L 110,40 L 120,5 L 130,75 L 140,40 L 200,40" className="animate-pulse duration-2000" />
-            </svg>
-            <div className="absolute text-[8px] font-mono text-[#00ffff]/60 bottom-0 left-4">
-              <span>HEART_RATE_MONITOR</span>
-            </div>
-          </div>
-        </div>
-      )
     }
   ];
+
+  const renderBackground = (id) => {
+    if (id === "decentraestate") return <DecentraEstateBackground />;
+    if (id === "malicious-detector") return <MaliciousDetectorBackground />;
+    if (id === "cliniq") return <CliniqBackground />;
+    return null;
+  };
 
   return (
     <section 
       id="projects" 
-      className="relative min-h-screen w-full flex items-center justify-center py-24 px-6 overflow-hidden bg-[#030303]/20"
+      className="relative min-h-screen w-full flex items-center justify-center py-14 md:py-24 px-6 overflow-hidden bg-[#030303]/20"
     >
       <div className="absolute inset-0 bg-dots-cyber opacity-[0.02] pointer-events-none" />
 
@@ -163,7 +477,7 @@ export default function Projects() {
               <ProjectTiltCard className="h-full flex flex-col justify-between p-6 border-white/5 hover:border-accent-orange/20 hover:shadow-[0_0_30px_rgba(255,94,0,0.08)] transition-all">
                 
                 {/* Visual Graphics Background */}
-                {project.graphic}
+                {renderBackground(project.id)}
 
                 <div className="relative z-10 flex flex-col">
                   {/* Card Header Info */}
