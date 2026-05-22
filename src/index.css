@@ -53,6 +53,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  content: "";
+  opacity: 0.012;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -264,137 +277,168 @@ html.lenis, html.lenis body {
    ========================================== */
 
 html.light {
-  background-color: #f7f7f9;
-  color: #4a4a4a;
+  background: radial-gradient(circle at 50% 50%, #FFFDFB 0%, #FAF8F5 100%);
+  color: #3d3b37;
 }
 
 html.light body {
-  background-color: #f7f7f9;
-  color: #4a4a4a;
+  background: radial-gradient(circle at 50% 50%, #FFFDFB 0%, #FAF8F5 100%);
+  color: #3d3b37;
 }
 
 /* Scrollbars overrides */
 html.light ::-webkit-scrollbar-track {
-  background: #f7f7f9;
+  background: #FAF8F5;
 }
 
 html.light ::-webkit-scrollbar-thumb {
-  background: #e2e8f0;
+  background: #e5e2db;
 }
 
 html.light ::-webkit-scrollbar-thumb:hover {
   background: #ff5e00;
 }
 
-/* Background panel / card overrides */
+/* Background panel / card overrides with soft glassmorphism */
 html.light .bg-neutral-950,
 html.light .bg-neutral-950\/40,
 html.light .bg-neutral-950\/45,
 html.light .bg-neutral-950\/60,
 html.light .bg-neutral-950\/80,
 html.light .bg-neutral-950\/30,
+html.light .bg-neutral-950\/20,
 html.light .bg-neutral-900,
-html.light .bg-neutral-900\/60 {
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+html.light .bg-neutral-900\/60,
+html.light .glass-card {
+  background-color: rgba(254, 253, 250, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.72) !important;
+  box-shadow: 0 10px 40px rgba(255, 94, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.01) !important;
 }
 
 html.light .bg-\[\#030303\]\/30,
 html.light .bg-\[\#030303\]\/20 {
-  background-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: rgba(253, 251, 247, 0.35) !important;
 }
 
 html.light .glass-panel {
-  background: rgba(255, 255, 255, 0.75) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  background: rgba(254, 253, 250, 0.52) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  box-shadow: 0 12px 40px rgba(255, 94, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.01) !important;
 }
 
-html.light .glass-card {
-  background: rgba(255, 255, 255, 0.65) !important;
-  border-color: rgba(0, 0, 0, 0.06) !important;
+html.light .glass-card:hover,
+html.light .interactive-card:hover {
+  border-color: rgba(255, 94, 0, 0.35) !important;
+  box-shadow: 0 16px 40px rgba(255, 94, 0, 0.08), 0 0 18px rgba(255, 94, 0, 0.02) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Border overrides */
 html.light .border-neutral-800,
 html.light .border-neutral-900,
 html.light .border-white\/5 {
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
 }
 
 html.light .border-t.border-neutral-900 {
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Text color overrides */
+html.light .bg-neutral-800 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Luxury warm typography contrast overrides */
 html.light .text-white {
-  color: #171717 !important;
+  color: #1d1b18 !important; /* Deep luxury warm charcoal */
 }
 
 html.light .text-neutral-300 {
-  color: #262626 !important;
+  color: #3d3a36 !important; /* Soft body text */
 }
 
 html.light .text-neutral-400 {
-  color: #4a4a4a !important;
+  color: #59554e !important; /* Muted descriptor copy */
 }
 
 html.light .text-neutral-500 {
-  color: #6b7280 !important;
+  color: #7d756b !important; /* Secondary labels */
 }
 
 html.light .text-neutral-600 {
-  color: #8b8d99 !important;
+  color: #9c9285 !important; /* HUD system details */
 }
 
-/* Button & interactive components overrides */
+/* Active navigation link active dot background */
+html.light .bg-accent-orange\/\[0\.04\] {
+  background-color: rgba(255, 94, 0, 0.08) !important;
+}
+
+html.light .border-accent-orange\/30 {
+  border-color: rgba(255, 94, 0, 0.35) !important;
+}
+
+/* Interactive Buttons: Frosted base with glowing amber/orange gradients on hover */
 html.light .cyber-button {
-  background: rgba(255, 255, 255, 0.6);
-  color: #171717;
-  border-color: rgba(0, 0, 0, 0.12);
+  background: rgba(254, 253, 250, 0.5) !important;
+  color: #1d1b18 !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 16px rgba(255, 94, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 html.light .cyber-button:hover {
-  color: #ff5e00;
-  border-color: #ff5e00;
-  background: rgba(255, 255, 255, 0.95);
+  color: #ffffff !important;
+  border-color: #ff5e00 !important;
+  background: linear-gradient(135deg, #ff5e00 0%, #ff8c00 100%) !important;
+  box-shadow: 0 8px 24px rgba(255, 94, 0, 0.22), 0 0 12px rgba(255, 94, 0, 0.1) !important;
+  transform: translateY(-2px) !important;
 }
 
 html.light .glitch-text::before,
 html.light .glitch-text::after {
-  background: #f7f7f9 !important;
+  background: #FAF8F5 !important;
 }
 
 html.light .text-stroke {
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.12);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* HUD elements grids & dots overrides */
+html.light .text-stroke-active {
+  -webkit-text-stroke: 1px rgba(255, 94, 0, 0.4) !important;
+}
+
+/* HUD grids & dots */
 html.light .bg-grid-cyber {
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
 }
 
 html.light .bg-dots-cyber {
-  background-image: radial-gradient(rgba(255, 94, 0, 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 94, 0, 0.035) 1px, transparent 1px);
 }
 
 /* Gradient transition overlays in light mode */
 html.light .bg-gradient-to-b.from-\[\#030303\]\/30 {
-  background-image: linear-gradient(to bottom, rgba(247, 247, 249, 0.3) 0%, transparent 100%) !important;
+  background-image: linear-gradient(to bottom, rgba(250, 248, 245, 0.3) 0%, transparent 100%) !important;
 }
 
 html.light .bg-gradient-to-r.from-\[\#030303\] {
-  background-image: linear-gradient(to right, #f7f7f9 0%, transparent 50%, #f7f7f9 100%) !important;
+  background-image: linear-gradient(to right, #FAF8F5 0%, transparent 50%, #FAF8F5 100%) !important;
 }
 
 html.light .to-\[\#030303\] {
-  --tw-gradient-to: #f7f7f9 !important;
+  --tw-gradient-to: #FAF8F5 !important;
 }
 
 html.light .from-\[\#030303\]\/30 {
-  --tw-gradient-from: rgba(247, 247, 249, 0.3) !important;
+  --tw-gradient-from: rgba(250, 248, 245, 0.3) !important;
 }
 
 html.light .via-transparent {
@@ -402,11 +446,29 @@ html.light .via-transparent {
 }
 
 html.light .to-\[\#030303\]\/80 {
-  --tw-gradient-to: rgba(247, 247, 249, 0.8) !important;
+  --tw-gradient-to: rgba(250, 248, 245, 0.8) !important;
 }
 
 /* Drawer menu in mobile drawer */
 html.light .bg-\[\#030303\]\/95 {
-  background-color: rgba(247, 247, 249, 0.95) !important;
+  background-color: rgba(250, 248, 245, 0.96) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+/* Placeholder override in light mode for input & textarea elements */
+html.light input::placeholder,
+html.light textarea::placeholder,
+html.light .placeholder-neutral-700::placeholder {
+  color: #9c9285 !important;
+  opacity: 0.85 !important;
+}
+
+/* Hover overrides for transparent elements in light mode */
+html.light .hover\:text-white:hover {
+  color: #ff5e00 !important;
+}
+
+html.light .hover\:border-neutral-700:hover {
+  border-color: rgba(255, 94, 0, 0.35) !important;
 }
 

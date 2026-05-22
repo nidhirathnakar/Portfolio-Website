@@ -38,6 +38,7 @@ function DecentraEstateBackground() {
     let gridOffset = 0;
 
     const draw = () => {
+      const isLight = document.documentElement.classList.contains("light");
       ctx.clearRect(0, 0, width, height);
 
       // Subtle futuristic orange glow (radial)
@@ -49,13 +50,13 @@ function DecentraEstateBackground() {
         height / 2,
         Math.max(width, height) / 1.2
       );
-      glowGrad.addColorStop(0, "rgba(255, 94, 0, 0.07)");
+      glowGrad.addColorStop(0, isLight ? "rgba(255, 94, 0, 0.04)" : "rgba(255, 94, 0, 0.07)");
       glowGrad.addColorStop(1, "rgba(255, 94, 0, 0)");
       ctx.fillStyle = glowGrad;
       ctx.fillRect(0, 0, width, height);
 
       // Holographic grid motion
-      ctx.strokeStyle = "rgba(255, 94, 0, 0.02)";
+      ctx.strokeStyle = isLight ? "rgba(230, 80, 0, 0.04)" : "rgba(255, 94, 0, 0.02)";
       ctx.lineWidth = 1;
       gridOffset = (gridOffset + 0.1) % 30;
       
@@ -82,7 +83,7 @@ function DecentraEstateBackground() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 94, 0, 0.25)";
+        ctx.fillStyle = isLight ? "rgba(230, 80, 0, 0.4)" : "rgba(255, 94, 0, 0.25)";
         ctx.fill();
       });
 
@@ -99,7 +100,9 @@ function DecentraEstateBackground() {
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             const alpha = (1 - dist / 90) * 0.12;
-            ctx.strokeStyle = `rgba(255, 94, 0, ${alpha})`;
+            ctx.strokeStyle = isLight 
+              ? `rgba(230, 80, 0, ${alpha * 1.5})` 
+              : `rgba(255, 94, 0, ${alpha})`;
             ctx.stroke();
           }
         }
@@ -148,11 +151,12 @@ function MaliciousDetectorBackground() {
     let pulseDirection = 1;
 
     const draw = () => {
-      ctx.fillStyle = "rgba(3, 3, 3, 0.15)";
+      const isLight = document.documentElement.classList.contains("light");
+      ctx.fillStyle = isLight ? "rgba(250, 248, 245, 0.15)" : "rgba(3, 3, 3, 0.15)";
       ctx.fillRect(0, 0, width, height);
 
       // Matrix rain (red theme)
-      ctx.fillStyle = "rgba(239, 68, 68, 0.1)";
+      ctx.fillStyle = isLight ? "rgba(220, 38, 38, 0.18)" : "rgba(239, 68, 68, 0.1)";
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < yPositions.length; i++) {
@@ -170,7 +174,7 @@ function MaliciousDetectorBackground() {
       }
 
       // Cyber Grid
-      ctx.strokeStyle = "rgba(239, 68, 68, 0.01)";
+      ctx.strokeStyle = isLight ? "rgba(220, 38, 38, 0.02)" : "rgba(239, 68, 68, 0.01)";
       ctx.lineWidth = 1;
       const gridSpacing = 25;
       for (let x = 0; x < width; x += gridSpacing) {
@@ -190,8 +194,8 @@ function MaliciousDetectorBackground() {
       scanLineY = (scanLineY + 1) % height;
       const scanGrad = ctx.createLinearGradient(0, scanLineY - 10, 0, scanLineY + 2);
       scanGrad.addColorStop(0, "rgba(239, 68, 68, 0)");
-      scanGrad.addColorStop(0.5, "rgba(239, 68, 68, 0.05)");
-      scanGrad.addColorStop(1, "rgba(239, 68, 68, 0.15)");
+      scanGrad.addColorStop(0.5, isLight ? "rgba(220, 38, 38, 0.08)" : "rgba(239, 68, 68, 0.05)");
+      scanGrad.addColorStop(1, isLight ? "rgba(220, 38, 38, 0.2)" : "rgba(239, 68, 68, 0.15)");
       
       ctx.fillStyle = scanGrad;
       ctx.fillRect(0, scanLineY - 10, width, 12);
@@ -199,7 +203,7 @@ function MaliciousDetectorBackground() {
       ctx.beginPath();
       ctx.moveTo(0, scanLineY);
       ctx.lineTo(width, scanLineY);
-      ctx.strokeStyle = "rgba(239, 68, 68, 0.25)";
+      ctx.strokeStyle = isLight ? "rgba(220, 38, 38, 0.35)" : "rgba(239, 68, 68, 0.25)";
       ctx.lineWidth = 0.8;
       ctx.stroke();
 
@@ -212,12 +216,14 @@ function MaliciousDetectorBackground() {
         pulseOpacity = 0;
         pulseDirection = 1;
       }
-      ctx.fillStyle = `rgba(239, 68, 68, ${pulseOpacity * 0.1})`;
+      ctx.fillStyle = isLight 
+        ? `rgba(220, 38, 38, ${pulseOpacity * 0.12})` 
+        : `rgba(239, 68, 68, ${pulseOpacity * 0.1})`;
       ctx.fillRect(0, 0, width, height);
 
       // Noise glitch
       if (Math.random() > 0.985) {
-        ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
+        ctx.fillStyle = isLight ? "rgba(220, 38, 38, 0.2)" : "rgba(239, 68, 68, 0.15)";
         ctx.fillRect(Math.random() * width, Math.random() * height, Math.random() * 40 + 10, Math.random() * 3 + 1);
       }
 
@@ -272,6 +278,7 @@ function CliniqBackground() {
     let pulseX = 0;
 
     const draw = () => {
+      const isLight = document.documentElement.classList.contains("light");
       ctx.clearRect(0, 0, width, height);
 
       // Soft glow
@@ -283,7 +290,7 @@ function CliniqBackground() {
         height * 0.75,
         Math.max(width, height) / 1.1
       );
-      glowGrad.addColorStop(0, "rgba(0, 255, 255, 0.05)");
+      glowGrad.addColorStop(0, isLight ? "rgba(13, 148, 136, 0.08)" : "rgba(0, 255, 255, 0.05)");
       glowGrad.addColorStop(1, "rgba(0, 255, 255, 0)");
       ctx.fillStyle = glowGrad;
       ctx.fillRect(0, 0, width, height);
@@ -291,9 +298,12 @@ function CliniqBackground() {
       // ECG wave
       ctx.beginPath();
       ctx.lineWidth = 1.2;
-      ctx.strokeStyle = "rgba(0, 255, 255, 0.09)";
-      ctx.shadowBlur = 3;
-      ctx.shadowColor = "#00ffff";
+      ctx.strokeStyle = isLight ? "rgba(13, 148, 136, 0.22)" : "rgba(0, 255, 255, 0.09)";
+      
+      if (!isLight) {
+        ctx.shadowBlur = 3;
+        ctx.shadowColor = "#00ffff";
+      }
 
       ctx.moveTo(0, height * 0.65);
       for (let x = 0; x < width; x++) {
@@ -323,7 +333,9 @@ function CliniqBackground() {
         }
         if (p.x < 0 || p.x > width) p.vx *= -1;
 
-        ctx.strokeStyle = `rgba(0, 255, 255, ${p.opacity})`;
+        ctx.strokeStyle = isLight 
+          ? `rgba(13, 148, 136, ${p.opacity * 1.5})` 
+          : `rgba(0, 255, 255, ${p.opacity})`;
         ctx.lineWidth = 0.8;
 
         if (p.type === "cross") {
@@ -355,7 +367,7 @@ function CliniqBackground() {
 }
 
 // Project Tilt Card Wrapper
-function ProjectTiltCard({ children, className }) {
+function ProjectTiltCard({ children, className, isLight }) {
   const cardRef = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [glow, setGlow] = useState({ x: 50, y: 50 });
@@ -398,7 +410,7 @@ function ProjectTiltCard({ children, className }) {
     >
       <div 
         style={{
-          background: `radial-gradient(200px circle at ${glow.x}% ${glow.y}%, rgba(255, 94, 0, 0.09), transparent 80%)`
+          background: `radial-gradient(200px circle at ${glow.x}% ${glow.y}%, ${isLight ? "rgba(255, 115, 0, 0.15)" : "rgba(255, 94, 0, 0.09)"}, transparent 80%)`
         }}
         className="absolute inset-0 pointer-events-none"
       />
@@ -408,6 +420,25 @@ function ProjectTiltCard({ children, className }) {
 }
 
 export default function Projects() {
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLight(document.documentElement.classList.contains("light"));
+    };
+
+    checkTheme(); // Initial check
+
+    // Set up a MutationObserver to listen to class additions/removals on the html tag
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const projectsData = [
     {
       id: "decentraestate",
@@ -434,7 +465,7 @@ export default function Projects() {
       desc: "A medical practice management infrastructure simplifying appointment bookings, digital patient records, and doctor scheduling, coupled with medical NLP classification features.",
       tech: ["Python", "Machine Learning", "NLP", "Flask", "MongoDB", "JavaScript"],
       icon: <Cpu className="w-5 h-5 text-[#00ffff]" />,
-      accentColor: "#00ffff",
+      accentColor: isLight ? "#0d9488" : "#00ffff", // softer teal in light mode
     }
   ];
 
@@ -474,7 +505,7 @@ export default function Projects() {
               transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="h-full"
             >
-              <ProjectTiltCard className="h-full flex flex-col justify-between p-6 border-white/5 hover:border-accent-orange/20 hover:shadow-[0_0_30px_rgba(255,94,0,0.08)] transition-all">
+              <ProjectTiltCard isLight={isLight} className="h-full flex flex-col justify-between p-6 border-white/5 hover:border-accent-orange/20 hover:shadow-[0_0_30px_rgba(255,94,0,0.08)] transition-all">
                 
                 {/* Visual Graphics Background */}
                 {renderBackground(project.id)}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Send, Sparkles, RefreshCw } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import confetti from "canvas-confetti";
 
 export default function Contact() {
@@ -176,6 +177,22 @@ export default function Contact() {
               <div className="font-mono text-left">
                 <p className="text-[10px] sm:text-xs text-neutral-500 tracking-wider">GITHUB INVENTORY</p>
                 <p className="text-sm text-neutral-300 group-hover:text-white transition-colors">nidhirathnakar</p>
+              </div>
+            </a>
+
+            {/* LeetCode Link */}
+            <a 
+              href="https://leetcode.com/u/nidxi/" 
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="flex items-center gap-4 p-4 rounded-sm border border-neutral-900 bg-neutral-950/40 hover:border-accent-orange/30 hover:bg-neutral-950/70 transition-all group"
+            >
+              <div className="p-2 bg-neutral-900 border border-neutral-800 rounded-sm text-neutral-400 group-hover:text-accent-orange group-hover:border-accent-orange/40 transition-all">
+                <SiLeetcode className="w-4.5 h-4.5" />
+              </div>
+              <div className="font-mono text-left">
+                <p className="text-[10px] sm:text-xs text-neutral-500 tracking-wider">LEETCODE METRICS</p>
+                <p className="text-sm text-neutral-300 group-hover:text-white transition-colors">nidxi</p>
               </div>
             </a>
           </div>

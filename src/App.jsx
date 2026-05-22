@@ -106,6 +106,14 @@ function App() {
                   LINKEDIN
                 </a>
                 <a 
+                  href="https://leetcode.com/u/nidxi/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-accent-orange transition-colors"
+                >
+                  LEETCODE
+                </a>
+                <a 
                   href="mailto:nidhirathnakar@gmail.com" 
                   className="hover:text-accent-orange transition-colors"
                 >

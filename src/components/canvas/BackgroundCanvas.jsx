@@ -138,10 +138,10 @@ function FloatingParticles({ mousePos, isLight }) {
   return (
     <Points ref={pointsRef} positions={positions.current} stride={3}>
       <pointsMaterial
-        size={0.035}
+        size={isLight ? 0.022 : 0.035}
         color={isLight ? "#cc4b00" : "#ff9d00"}
         transparent
-        opacity={isLight ? 0.6 : 0.45}
+        opacity={isLight ? 0.35 : 0.45}
         sizeAttenuation={true}
         depthWrite={false}
         blending={isLight ? THREE.NormalBlending : THREE.AdditiveBlending}
@@ -183,13 +183,13 @@ function CoreGeometry({ mousePos, isLight }) {
         <mesh ref={meshRef}>
           <sphereGeometry args={[1, sphereSegments, sphereSegments]} />
           <MeshDistortMaterial
-            color={isLight ? "#e5e5e5" : "#080808"}
-            roughness={isLight ? 0.25 : 0.1}
-            metalness={isLight ? 0.2 : 0.9}
+            color={isLight ? "#faf8f5" : "#080808"}
+            roughness={isLight ? 0.15 : 0.1}
+            metalness={isLight ? 0.1 : 0.9}
             distort={0.45}
             speed={2.2}
-            clearcoat={isLight ? 0.1 : 1.0}
-            clearcoatRoughness={0.1}
+            clearcoat={isLight ? 0.85 : 1.0}
+            clearcoatRoughness={isLight ? 0.04 : 0.1}
           />
         </mesh>
       </Float>
@@ -201,7 +201,7 @@ function CoreGeometry({ mousePos, isLight }) {
           color="#ff5e00"
           wireframe
           transparent
-          opacity={isLight ? 0.18 : 0.08}
+          opacity={isLight ? 0.12 : 0.08}
           blending={isLight ? THREE.NormalBlending : THREE.AdditiveBlending}
         />
       </mesh>
@@ -231,7 +231,35 @@ export default function BackgroundCanvas() {
   }, []);
 
   return (
-    <div className={`fixed top-0 left-0 w-full h-screen -z-10 pointer-events-none select-none transition-colors duration-500 ${isLight ? "bg-[#f7f7f9]" : "bg-[#030303]"}`}>
+    <div className={`fixed top-0 left-0 w-full h-screen -z-10 pointer-events-none select-none transition-colors duration-500 ${isLight ? "bg-[#FAF8F5]" : "bg-[#030303]"}`}>
+      {/* Premium grain/noise overlay for tactical material feel */}
+      <div className="noise-overlay" />
+
+      {/* Premium warm cinematic background ambient light blobs in light theme */}
+      {isLight && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          {/* Warm ivory radial glow top-left */}
+          <div className="absolute -top-[20%] -left-[20%] w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,rgba(255,247,237,0.85)_0%,rgba(255,110,26,0.06)_60%,transparent_100%)] blur-[90px] animate-float opacity-80" />
+          
+          {/* Central diffused peach/orange blob behind the hero header area */}
+          <div 
+            className="absolute top-[10%] left-[20%] w-[60%] h-[50%] rounded-full bg-[radial-gradient(circle,rgba(255,140,0,0.15)_0%,rgba(255,94,0,0.02)_60%,transparent_100%)] blur-[80px]"
+          />
+
+          {/* Soft glowing amber blob center-right */}
+          <div 
+            className="absolute top-[25%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,rgba(255,237,213,0.7)_0%,rgba(255,110,26,0.04)_50%,transparent_100%)] blur-[100px] animate-float" 
+            style={{ animationDelay: "-2.5s", animationDuration: "9s" }} 
+          />
+
+          {/* Soft gold/cream radial glow bottom-left */}
+          <div 
+            className="absolute -bottom-[15%] left-[5%] w-[65%] h-[65%] rounded-full bg-[radial-gradient(circle,rgba(254,243,199,0.75)_0%,rgba(255,110,26,0.04)_70%,transparent_100%)] blur-[90px] animate-float" 
+            style={{ animationDelay: "-5s", animationDuration: "11s" }} 
+          />
+        </div>
+      )}
+
       <Canvas
         camera={{ position: [0, 0, 6.5], fov: 60 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
@@ -243,8 +271,8 @@ export default function BackgroundCanvas() {
       
       {/* Subtle grid and dark gradient overlay HUD layers */}
       <div className="absolute inset-0 bg-dots-cyber pointer-events-none opacity-30 mix-blend-overlay" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030303]/30 via-transparent to-[#030303] pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
+      <div className={`absolute inset-0 bg-gradient-to-b via-transparent pointer-events-none ${isLight ? "from-[#FAF8F5]/30 to-[#FAF8F5]" : "from-[#030303]/30 to-[#030303]"}`} />
+      <div className={`absolute inset-0 bg-gradient-to-r via-transparent pointer-events-none ${isLight ? "from-[#FAF8F5] to-[#FAF8F5]/80" : "from-[#030303] to-[#030303]/80"}`} />
     </div>
   );
 }
