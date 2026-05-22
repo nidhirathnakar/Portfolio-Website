@@ -504,7 +504,7 @@ export default function Projects() {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[11px] md:text-xs text-neutral-400 font-light leading-relaxed mb-6">
+                  <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed md:leading-6 mb-6">
                     {project.desc}
                   </p>
                 </div>
@@ -518,7 +518,7 @@ export default function Projects() {
                         borderColor: `${project.accentColor}18`,
                         color: project.accentColor
                       }}
-                      className="px-2 py-0.5 rounded-sm border text-[8px] font-mono tracking-wider uppercase bg-neutral-950"
+                      className="px-2 py-0.5 rounded-sm border text-[10px] sm:text-xs font-mono tracking-wider uppercase bg-neutral-950"
                     >
                       {t}
                     </span>

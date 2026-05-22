@@ -126,7 +126,7 @@ export default function Contact() {
               TRANSMIT A MESSAGE
             </h2>
 
-            <p className="text-neutral-400 font-light text-sm leading-relaxed mb-8">
+            <p className="text-neutral-400 font-light text-base lg:text-[17px] leading-relaxed md:leading-7 mb-8">
               Whether you want to discuss AI models, build Web3 smart contracts, collaborate on client platforms, or just check standard network systems, feel free to transmit a ping.
             </p>
           </div>
@@ -142,8 +142,8 @@ export default function Contact() {
                 <Mail className="w-4.5 h-4.5" />
               </div>
               <div className="font-mono text-left">
-                <p className="text-[8px] text-neutral-600 tracking-wider">DIRECT EMAIL</p>
-                <p className="text-xs text-neutral-300 group-hover:text-white transition-colors">nidhirathnakar@gmail.com</p>
+                <p className="text-[10px] sm:text-xs text-neutral-500 tracking-wider">DIRECT EMAIL</p>
+                <p className="text-sm text-neutral-300 group-hover:text-white transition-colors">nidhirathnakar@gmail.com</p>
               </div>
             </a>
 
@@ -158,8 +158,8 @@ export default function Contact() {
                 <FaLinkedin className="w-4.5 h-4.5" />
               </div>
               <div className="font-mono text-left">
-                <p className="text-[8px] text-neutral-600 tracking-wider">LINKEDIN PROFILE</p>
-                <p className="text-xs text-neutral-300 group-hover:text-white transition-colors">nidhi-rathnakar-317b5723a</p>
+                <p className="text-[10px] sm:text-xs text-neutral-500 tracking-wider">LINKEDIN PROFILE</p>
+                <p className="text-sm text-neutral-300 group-hover:text-white transition-colors">nidhi-rathnakar-317b5723a</p>
               </div>
             </a>
 
@@ -174,8 +174,8 @@ export default function Contact() {
                 <FaGithub className="w-4.5 h-4.5" />
               </div>
               <div className="font-mono text-left">
-                <p className="text-[8px] text-neutral-600 tracking-wider">GITHUB INVENTORY</p>
-                <p className="text-xs text-neutral-300 group-hover:text-white transition-colors">nidhirathnakar</p>
+                <p className="text-[10px] sm:text-xs text-neutral-500 tracking-wider">GITHUB INVENTORY</p>
+                <p className="text-sm text-neutral-300 group-hover:text-white transition-colors">nidhirathnakar</p>
               </div>
             </a>
           </div>
@@ -205,7 +205,7 @@ export default function Contact() {
                 >
                   {/* Name field */}
                   <div className="flex flex-col gap-2 font-mono text-left">
-                    <label className="text-[10px] text-neutral-600 tracking-widest uppercase">
+                    <label className="text-[11px] sm:text-xs text-neutral-500 tracking-widest uppercase">
                       01 // SENDER_NAME
                     </label>
                     <div className="relative">
@@ -218,7 +218,7 @@ export default function Contact() {
                         disabled={status === "sending"}
                         onFocus={() => setFocused("name")}
                         onBlur={() => setFocused("")}
-                        className="w-full bg-neutral-900/60 border border-neutral-800 focus:border-neutral-700 rounded-sm px-4 py-3 text-xs text-white placeholder-neutral-700 outline-none transition-colors"
+                        className="w-full bg-neutral-900/60 border border-neutral-800 focus:border-neutral-700 rounded-sm px-4 py-3 text-sm text-white placeholder-neutral-700 outline-none transition-colors"
                         placeholder="ENTER YOUR NAME..."
                       />
                       <div 
@@ -231,7 +231,7 @@ export default function Contact() {
 
                   {/* Email field */}
                   <div className="flex flex-col gap-2 font-mono text-left">
-                    <label className="text-[10px] text-neutral-600 tracking-widest uppercase">
+                    <label className="text-[11px] sm:text-xs text-neutral-500 tracking-widest uppercase">
                       02 // RETURN_PATH
                     </label>
                     <div className="relative">
@@ -244,7 +244,7 @@ export default function Contact() {
                         disabled={status === "sending"}
                         onFocus={() => setFocused("email")}
                         onBlur={() => setFocused("")}
-                        className="w-full bg-neutral-900/60 border border-neutral-800 focus:border-neutral-700 rounded-sm px-4 py-3 text-xs text-white placeholder-neutral-700 outline-none transition-colors"
+                        className="w-full bg-neutral-900/60 border border-neutral-800 focus:border-neutral-700 rounded-sm px-4 py-3 text-sm text-white placeholder-neutral-700 outline-none transition-colors"
                         placeholder="ENTER YOUR EMAIL..."
                       />
                       <div 
@@ -257,7 +257,7 @@ export default function Contact() {
 
                   {/* Message field */}
                   <div className="flex flex-col gap-2 font-mono text-left">
-                    <label className="text-[10px] text-neutral-600 tracking-widest uppercase">
+                    <label className="text-[11px] sm:text-xs text-neutral-500 tracking-widest uppercase">
                       03 // TRANSMISSION_BODY
                     </label>
                     <div className="relative">
@@ -270,7 +270,7 @@ export default function Contact() {
                         disabled={status === "sending"}
                         onFocus={() => setFocused("message")}
                         onBlur={() => setFocused("")}
-                        className="w-full bg-neutral-900/60 border border-neutral-800 focus:border-neutral-700 rounded-sm px-4 py-3 text-xs text-white placeholder-neutral-700 outline-none transition-colors resize-none"
+                        className="w-full bg-neutral-900/60 border border-neutral-800 focus:border-neutral-700 rounded-sm px-4 py-3 text-sm text-white placeholder-neutral-700 outline-none transition-colors resize-none"
                         placeholder="ENTER YOUR MESSAGE..."
                       />
                       <div 
@@ -285,7 +285,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={status === "sending" || !formData.name || !formData.email || !formData.message}
-                    className="w-full py-4 rounded-sm cyber-button text-xs font-mono font-bold tracking-[0.25em] uppercase text-white flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-4 rounded-sm cyber-button text-xs sm:text-sm font-mono font-bold tracking-[0.25em] uppercase text-white flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {status === "sending" ? (
                       <>
@@ -313,12 +313,12 @@ export default function Contact() {
                   <h3 className="font-title text-2xl font-bold text-white tracking-widest mb-4 uppercase">
                     PINGS DISPATCHED
                   </h3>
-                  <p className="text-xs text-neutral-400 max-w-sm leading-relaxed mb-8">
+                  <p className="text-sm text-neutral-400 max-w-sm leading-relaxed mb-8">
                     Your transmission has bypassed core relays and successfully reached the receiver inbox. Stand by for response.
                   </p>
                   <button
                     onClick={() => setStatus("idle")}
-                    className="px-6 py-2 border border-neutral-800 bg-neutral-900 text-[10px] font-mono font-bold tracking-[0.2em] text-neutral-400 hover:text-white hover:border-neutral-700 rounded-sm transition-all"
+                    className="px-6 py-2 border border-neutral-800 bg-neutral-900 text-xs font-mono font-bold tracking-[0.2em] text-neutral-400 hover:text-white hover:border-neutral-700 rounded-sm transition-all"
                   >
                     SEND ANOTHER PING
                   </button>

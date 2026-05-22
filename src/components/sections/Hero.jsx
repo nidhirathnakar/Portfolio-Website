@@ -67,7 +67,7 @@ export default function Hero() {
           className="mb-6 md:mb-8 px-4 py-1.5 rounded-full border border-accent-orange/20 bg-accent-orange/[0.03] flex items-center gap-2"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-accent-orange animate-ping" />
-          <span className="font-mono text-[9px] md:text-[10px] tracking-[0.25em] text-accent-orangeLight font-bold uppercase">
+          <span className="font-mono text-[10px] sm:text-xs tracking-[0.25em] text-accent-orangeLight font-bold uppercase">
             AVAILABLE FOR OPPORTUNITIES
           </span>
         </motion.div>
@@ -88,7 +88,7 @@ export default function Hero() {
 
         {/* Dynamic Title Subheader */}
         <motion.div variants={itemVariants} className="mb-4 md:mb-6 w-full max-w-3xl px-4 flex justify-center">
-          <h2 className="font-mono text-[2.4vw] sm:text-xs md:text-sm tracking-[0.16em] sm:tracking-[0.3em] text-neutral-500 uppercase whitespace-nowrap text-center">
+          <h2 className="font-mono text-[2.6vw] sm:text-sm md:text-base tracking-[0.16em] sm:tracking-[0.3em] text-neutral-500 uppercase whitespace-nowrap text-center">
             Computer Science Engineer <span className="text-accent-orange px-1">•</span> AI <span className="text-accent-orange px-1">•</span> Web3 <span className="text-accent-orange px-1">•</span> Full Stack Developer
           </h2>
         </motion.div>
@@ -96,7 +96,7 @@ export default function Hero() {
         {/* Elegant Tagline */}
         <motion.p
           variants={itemVariants}
-          className="text-neutral-400 text-sm md:text-base lg:text-lg font-light tracking-wide max-w-2xl leading-relaxed mb-6 md:mb-12"
+          className="text-neutral-400 text-base md:text-lg lg:text-xl font-light tracking-wide max-w-2xl leading-relaxed mb-6 md:mb-12"
         >
           Building intelligent systems, immersive digital experiences, and futuristic decentralized applications.
         </motion.p>
@@ -109,7 +109,7 @@ export default function Hero() {
           {/* Projects Button */}
           <button
             onClick={() => handleScrollTo("projects")}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm cyber-button flex items-center justify-center gap-2 text-xs font-mono font-bold tracking-[0.2em] uppercase text-white"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm cyber-button flex items-center justify-center gap-2 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase text-white"
           >
             <span>VIEW PROJECTS</span>
             <ChevronRight className="w-3.5 h-3.5 text-accent-orange group-hover:translate-x-1 transition-transform" />
@@ -117,10 +117,10 @@ export default function Hero() {
 
           {/* Resume Button */}
           <a
-            href="https://drive.google.com/file/d/1tOf2uqTRNlmaZBhnEvvCcVeQlOF12mvj/view?usp=drivesdk"
+            href="/resume/Nidhi_Rathnakar_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm border border-neutral-800 bg-neutral-950/20 backdrop-blur-sm hover:border-neutral-700 hover:text-white flex items-center justify-center gap-2 text-xs font-mono font-bold tracking-[0.2em] uppercase text-neutral-400 transition-all"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm border border-neutral-800 bg-neutral-950/20 backdrop-blur-sm hover:border-neutral-700 hover:text-white flex items-center justify-center gap-2 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase text-neutral-400 transition-all"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>RESUME</span>
@@ -129,7 +129,7 @@ export default function Hero() {
           {/* Contact Button */}
           <button
             onClick={() => handleScrollTo("contact")}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm border border-neutral-800 bg-neutral-950/20 backdrop-blur-sm hover:border-accent-orange/30 hover:text-white flex items-center justify-center gap-2 text-xs font-mono font-bold tracking-[0.2em] uppercase text-neutral-400 transition-all hover:shadow-[0_0_15px_rgba(255,94,0,0.15)]"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm border border-neutral-800 bg-neutral-950/20 backdrop-blur-sm hover:border-accent-orange/30 hover:text-white flex items-center justify-center gap-2 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase text-neutral-400 transition-all hover:shadow-[0_0_15px_rgba(255,94,0,0.15)]"
           >
             <Send className="w-3.5 h-3.5" />
             <span>CONTACT</span>
@@ -138,12 +138,12 @@ export default function Hero() {
       </motion.div>
 
       {/* Floating HUD status labels */}
-      <div className="absolute bottom-10 left-10 hidden xl:flex flex-col gap-1 text-[8px] font-mono text-neutral-600 tracking-wider">
+      <div className="absolute bottom-10 left-10 hidden xl:flex flex-col gap-1 text-[9px] sm:text-[10px] font-mono text-neutral-600 tracking-wider">
         <p>CAM_POS: [SCROLL_INTERPOLATION]</p>
         <p>MATRIX_RENDERER: THREE_R3F</p>
       </div>
 
-      <div className="absolute bottom-10 right-10 hidden xl:flex flex-col gap-1 text-[8px] font-mono text-neutral-600 tracking-wider text-right">
+      <div className="absolute bottom-10 right-10 hidden xl:flex flex-col gap-1 text-[9px] sm:text-[10px] font-mono text-neutral-600 tracking-wider text-right">
         <p>LOC: 12.9716° N, 77.5946° E</p>
         <p>SYSTEM_HZ: 60 FPS</p>
       </div>
@@ -156,7 +156,7 @@ export default function Hero() {
         onClick={() => handleScrollTo("about")}
         className="relative bottom-auto left-auto translate-x-0 mt-12 md:absolute md:bottom-8 md:left-1/2 md:-translate-x-1/2 md:mt-0 cursor-pointer flex flex-col items-center gap-1.5 md:gap-2 group z-10"
       >
-        <span className="font-mono text-[9px] tracking-[0.3em] text-neutral-600 group-hover:text-accent-orange transition-colors uppercase">
+        <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-neutral-600 group-hover:text-accent-orange transition-colors uppercase">
           SCROLL TO EXPLORE
         </span>
         <div className="w-5 h-9 md:w-6 md:h-10 border border-neutral-800 rounded-full flex justify-center p-1 group-hover:border-accent-orange/50 transition-colors">

@@ -142,7 +142,7 @@ export default function Skills() {
                   <div className="p-2 bg-neutral-900 border border-neutral-800 rounded-sm">
                     {cat.icon}
                   </div>
-                  <h3 className="font-mono text-xs font-bold text-white tracking-[0.15em] uppercase">
+                  <h3 className="font-mono text-sm font-bold text-white tracking-[0.15em] uppercase">
                     {cat.title}
                   </h3>
                 </div>
@@ -152,7 +152,7 @@ export default function Skills() {
                   {cat.skills.map((skill, sIdx) => (
                     <div 
                       key={sIdx}
-                      className="px-3 py-1.5 rounded-sm bg-neutral-900/60 border border-neutral-900 text-[10px] font-mono text-neutral-400 hover:text-white hover:border-accent-orange/45 hover:bg-accent-orange/[0.02] cursor-default transition-all duration-300 flex items-center gap-1.5 group"
+                      className="px-3 py-1.5 rounded-sm bg-neutral-900/60 border border-neutral-900 text-[11px] sm:text-xs font-mono text-neutral-400 hover:text-white hover:border-accent-orange/45 hover:bg-accent-orange/[0.02] cursor-default transition-all duration-300 flex items-center gap-1.5 group"
                     >
                       <span className="w-1 h-1 bg-neutral-600 rounded-full group-hover:bg-accent-orange transition-colors" />
                       {skill}

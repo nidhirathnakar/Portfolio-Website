@@ -57,7 +57,7 @@ export default function LoadingScreen({ onComplete }) {
           <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-accent-orange/5 to-transparent animate-scan-line pointer-events-none" />
 
           {/* Header Info HUD */}
-          <div className="flex justify-between items-start text-[10px] tracking-wider text-neutral-600">
+          <div className="flex justify-between items-start text-[11px] sm:text-xs tracking-wider text-neutral-600">
             <div>
               <p>PROJECT: PORTFOLIO_V3</p>
               <p>OPERATING SYSTEM: GEMINI_NT_10.0</p>
@@ -85,7 +85,7 @@ export default function LoadingScreen({ onComplete }) {
             </h1>
             
             {/* Title subheader */}
-            <p className="text-[11px] md:text-xs text-neutral-500 uppercase tracking-[0.4em] mb-12 text-center max-w-md">
+            <p className="text-xs md:text-sm text-neutral-500 uppercase tracking-[0.4em] mb-12 text-center max-w-md">
               AI • Web3 • Full Stack Engineer
             </p>
 
@@ -110,7 +110,7 @@ export default function LoadingScreen({ onComplete }) {
               />
             </div>
 
-            <div className="flex justify-between items-center text-[10px] tracking-wider text-neutral-500">
+            <div className="flex justify-between items-center text-[11px] sm:text-xs tracking-wider text-neutral-500">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent-orange animate-ping" />
                 <span>{logText}</span>

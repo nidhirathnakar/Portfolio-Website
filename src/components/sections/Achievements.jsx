@@ -105,13 +105,13 @@ export default function Achievements() {
                 </div>
 
                 {/* Stat label */}
-                <h3 className="font-mono text-[10px] text-accent-orangeLight font-bold tracking-[0.2em] mb-4 uppercase">
+                <h3 className="font-mono text-[11px] sm:text-xs text-accent-orangeLight font-bold tracking-[0.2em] mb-4 uppercase">
                   {item.label}
                 </h3>
               </div>
 
               {/* Detail desc */}
-              <p className="text-[10px] text-neutral-500 font-light leading-relaxed">
+              <p className="text-[11px] sm:text-xs md:text-sm text-neutral-500 font-light leading-relaxed">
                 {item.detail}
               </p>
             </motion.div>

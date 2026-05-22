@@ -62,7 +62,7 @@ export default function Experience() {
               {/* Experience Card */}
               <div className="p-6 md:p-8 rounded-sm border border-neutral-900 bg-neutral-950/45 hover:border-neutral-800 hover:shadow-[0_0_25px_rgba(0,0,0,0.4)] transition-all max-w-3xl">
                 {/* Meta details */}
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-neutral-900/60 text-[10px] font-mono text-neutral-500">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-neutral-900/60 text-[11px] sm:text-xs font-mono text-neutral-500">
                   <div className="flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-accent-orange" />
                     <span>{exp.period}</span>
@@ -77,12 +77,12 @@ export default function Experience() {
                 <h3 className="font-title text-lg md:text-xl font-bold text-white tracking-widest uppercase mb-1">
                   {exp.role}
                 </h3>
-                <h4 className="font-mono text-xs text-accent-orangeLight font-bold tracking-wider mb-6">
+                <h4 className="font-mono text-xs sm:text-sm text-accent-orangeLight font-bold tracking-wider mb-6">
                   {exp.company}
                 </h4>
 
                 {/* Job Description */}
-                <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
+                <p className="text-sm sm:text-base text-neutral-400 font-light leading-relaxed md:leading-7 mb-6">
                   {exp.desc}
                 </p>
 
@@ -91,7 +91,7 @@ export default function Experience() {
                   {exp.details.map((detail, dIdx) => (
                     <span 
                       key={dIdx}
-                      className="px-2.5 py-1 rounded-sm bg-neutral-900 text-[8px] font-mono text-neutral-400 border border-neutral-900"
+                      className="px-2.5 py-1 rounded-sm bg-neutral-900 text-[10px] sm:text-xs font-mono text-neutral-400 border border-neutral-900"
                     >
                       {detail}
                     </span>

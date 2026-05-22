@@ -66,7 +66,7 @@ export default function About() {
               />
               
               {/* Tech details hud overlay */}
-              <div className="absolute bottom-0 inset-x-0 bg-neutral-950/80 border-t border-neutral-800 px-3 py-2 text-[9px] font-mono text-neutral-500 flex justify-between items-center">
+              <div className="absolute bottom-0 inset-x-0 bg-neutral-950/80 border-t border-neutral-800 px-3 py-2 text-[10px] sm:text-xs font-mono text-neutral-500 flex justify-between items-center">
                 <span className="flex items-center gap-1">
                   <User className="w-2.5 h-2.5 text-accent-orange" />
                   NIDHI
@@ -114,14 +114,14 @@ export default function About() {
           {/* Bio text */}
           <motion.p 
             variants={cardVariants}
-            className="text-neutral-300 font-light text-sm md:text-base leading-relaxed mb-6"
+            className="text-neutral-300 font-light text-base lg:text-[17px] leading-relaxed md:leading-7 mb-6"
           >
             I am a passionate <b>Computer Science Engineering student</b> and developer dedicated to crafting intelligent, scalable, and visually immersive digital solutions. My engineering focus centers around combining the power of <b>Artificial Intelligence</b> with decentralized <b>Web3/Blockchain architectures</b> and robust full stack client interfaces.
           </motion.p>
 
           <motion.p 
             variants={cardVariants}
-            className="text-neutral-400 font-light text-sm leading-relaxed mb-8"
+            className="text-neutral-400 font-light text-base lg:text-[17px] leading-relaxed md:leading-7 mb-8"
           >
             Driven by continuous innovation and curiosity, I focus on building software that solves complex real-world logic challenges while delivering elegant, responsive, and memorable user experiences.
           </motion.p>
@@ -137,10 +137,10 @@ export default function About() {
                 <div className="mb-3 p-1.5 w-fit rounded-sm bg-neutral-900 border border-neutral-800 group-hover:border-accent-orange/40 transition-colors">
                   {area.icon}
                 </div>
-                <h3 className="font-mono text-[11px] font-bold text-white tracking-wider mb-2 uppercase">
+                <h3 className="font-mono text-xs sm:text-sm font-bold text-white tracking-wider mb-2 uppercase">
                   {area.title}
                 </h3>
-                <p className="text-[10px] text-neutral-500 leading-relaxed">
+                <p className="text-[11px] sm:text-xs md:text-sm text-neutral-500 leading-relaxed">
                   {area.desc}
                 </p>
               </motion.div>
@@ -150,7 +150,7 @@ export default function About() {
           {/* Skills quick badges */}
           <motion.div 
             variants={cardVariants}
-            className="flex flex-wrap gap-2 text-[9px] font-mono tracking-widest text-neutral-500 uppercase"
+            className="flex flex-wrap gap-2 text-[10px] sm:text-xs font-mono tracking-widest text-neutral-500 uppercase"
           >
             <span className="px-2.5 py-1 rounded-sm bg-neutral-900 border border-neutral-800">FULL STACK</span>
             <span className="px-2.5 py-1 rounded-sm bg-neutral-900 border border-neutral-800">UI / UX ARCHITECTURE</span>

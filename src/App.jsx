@@ -85,7 +85,7 @@ function App() {
           </main>
 
           {/* Digital System Footer */}
-          <footer className="relative z-10 w-full border-t border-neutral-900 bg-neutral-950/60 backdrop-blur-md py-8 px-6 text-center text-[10px] font-mono text-neutral-600">
+          <footer className="relative z-10 w-full border-t border-neutral-900 bg-neutral-950/60 backdrop-blur-md py-8 px-6 text-center text-[11px] sm:text-xs font-mono text-neutral-600">
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
               <p>© {new Date().getFullYear()} NIDHI. ALL CHANNELS SECURED.</p>
               <div className="flex gap-6">

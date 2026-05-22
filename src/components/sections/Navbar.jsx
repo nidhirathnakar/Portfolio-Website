@@ -113,7 +113,7 @@ export default function Navbar() {
                 <button
                   key={item.id}
                   onClick={() => handleLinkClick(item.id)}
-                  className={`relative px-4 py-1.5 text-[10px] font-mono font-bold tracking-widest transition-colors duration-300 ${
+                  className={`relative px-4 py-1.5 text-[11px] sm:text-xs font-mono font-bold tracking-widest transition-colors duration-300 ${
                     active ? "text-white" : "text-neutral-500 hover:text-neutral-300"
                   }`}
                 >

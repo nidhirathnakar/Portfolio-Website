@@ -88,7 +88,7 @@ export default function CustomCursor() {
         transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
       >
         {hovered && cursorType === "project" && (
-          <span className="absolute text-[8px] text-accent-orange font-mono tracking-widest uppercase top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <span className="absolute text-[9px] sm:text-[10px] text-accent-orange font-mono tracking-widest uppercase top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
             VIEW
           </span>
         )}
